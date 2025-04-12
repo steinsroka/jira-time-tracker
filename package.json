@@ -1,0 +1,138 @@
+{
+  "name": "jira-time-tracker",
+  "version": "1.0.0",
+  "description": "jira-time-tracker for worklog",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "jira",
+    "worklog",
+    "time",
+    "tracker"
+  ],
+  "author": "steinsroka@gmail.com",
+  "license": "ISC",
+  "activationEvents": [
+    "onCommand:jira-time-tracker.startTimer",
+    "onCommand:jira-time-tracker.pauseTimer",
+    "onCommand:jira-time-tracker.stopTimer",
+    "onCommand:jira-time-tracker.uploadWorklog",
+    "onCommand:jira-time-tracker.uploadAllWorklogs",
+    "onCommand:jira-time-tracker.generateReport",
+    "onCommand:jira-time-tracker.showExtensionPage"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "jira-time-tracker.startTimer",
+        "title": "Start Timer"
+      },
+      {
+        "command": "jira-time-tracker.pauseTimer",
+        "title": "Pause Timer"
+      },
+      {
+        "command": "jira-time-tracker.stopTimer",
+        "title": "Stop Timer"
+      },
+      {
+        "command": "jira-time-tracker.uploadWorklog",
+        "title": "Upload Worklog"
+      },
+      {
+        "command": "jira-time-tracker.uploadAllWorklogs",
+        "title": "Upload All Worklogs"
+      },
+      {
+        "command": "jira-time-tracker.generateReport",
+        "title": "Generate Time Report"
+      },
+      {
+        "command": "jira-time-tracker.showExtensionPage",
+        "title": "Show Time Tracker Page"
+      }
+    ],
+    "configuration": {
+      "title": "JIRA Time Tracker",
+      "properties": {
+        "jiraTimeTracker.jiraUrl": {
+          "type": "string",
+          "default": "",
+          "description": "URL of your JIRA instance"
+        },
+        "jiraTimeTracker.username": {
+          "type": "string",
+          "default": "",
+          "description": "JIRA username"
+        },
+        "jiraTimeTracker.apiToken": {
+          "type": "string",
+          "default": "",
+          "description": "JIRA API token"
+        },
+        "jiraTimeTracker.autoUploadOnPush": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically upload worklog when pushing to git"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "jira-time-tracker",
+          "title": "JIRA Time Tracker",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "jira-time-tracker": [
+        {
+          "id": "savedWorklogs",
+          "name": "Saved Worklogs"
+        },
+        {
+          "id": "reportGenerator",
+          "name": "Report Generator"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "npm run test-compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "moment": "^2.29.1",
+    "date-fns": "^2.22.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "mocha": "^8.4.0",
+    "typescript": "^4.3.2",
+    "vscode-test": "^1.5.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
